@@ -1,4 +1,4 @@
-<div *ngIf="isLoggedIn" fxLayout="row" fxLayoutAlign="end center">
+<div *ngIf="isLoggedIn && this.isAdmin()" fxLayout="row" fxLayoutAlign="end center">
   <button routerLink="/create" mat-raised-button color="primary">Create</button>
 </div>
 

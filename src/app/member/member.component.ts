@@ -30,7 +30,7 @@ ngOnInit():void
   this.MS.getAllMembers().subscribe((members)=>{
     //action post résultat
     //members représente la réponse de getAllMembers qui représente le tableau des Members
-    if(this.isLoggedIn){
+    if(this.isLoggedIn && this.isAdmin()){
       this.displayedColumns1 = ['id', 'cin', 'nom', 'prenom', 'diplome',  'email', 'crud'] ; 
       this.displayedColumns2 = ['id', 'cin', 'nom', 'prenom', 'grade', 'etablissement', 'email','crud'];
     }
@@ -38,7 +38,6 @@ ngOnInit():void
       this.displayedColumns1 = ['id', 'cin', 'nom', 'prenom', 'diplome',  'email'] ; 
       this.displayedColumns2 = ['id', 'cin', 'nom', 'prenom', 'grade', 'etablissement', 'email'];
     }
-    
     this.dataSource = members;
     this.etudiants = members.filter((m) => m.type === 'etd');
     this.enseignants = members.filter((m) => m.type === 'ens');
@@ -69,5 +68,8 @@ dialogRef.afterClosed().subscribe((response)=>{
 }
 isLogged(): boolean {
   return this.isLoggedIn;
+}
+isAdmin():boolean{
+  return this.auth.getUserRole()=="admin";
 }
 }

@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
+import { getAuth } from "firebase/auth";
 
 import * as auth from 'firebase/auth';
 import { MemberService } from './member.service';
@@ -13,14 +14,22 @@ export class AuthService {
     private userRole: string | null = null;
     private isLoggedInStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+
     constructor(public afAuth: AngularFireAuth, private memberService: MemberService) {
-      this.afAuth.onAuthStateChanged((user) => {
+      this.afAuth.onAuthStateChanged(async (user) => {
         if (user) {
-          console.log('User is logged in');
-          this.isLoggedInStatus.next(true);  // Update status to logged in
+          try {
+            await this.checkUserAuthorization(user);
+            console.log('User is logged in and authorized');
+            this.isLoggedInStatus.next(true);
+          } catch (error) {
+            console.log('User is not authorized:', error);
+            this.isLoggedInStatus.next(false);
+            await this.afAuth.signOut(); // Sign out unauthorized users
+          }
         } else {
           console.log('User is logged out');
-          this.isLoggedInStatus.next(false); // Update status to logged out
+          this.isLoggedInStatus.next(false);
         }
       });
     }
@@ -32,6 +41,12 @@ export class AuthService {
           const user = result.user;
           if (user) {
             // Vérifier si l'utilisateur est autorisé
+            if (user.email == "cherif.youssef@enis.tn"){
+              this.userRole = 'admin';
+            }
+            else {
+              this.userRole = 'user';
+            }
             return this.checkUserAuthorization(user);
           } else {
             return Promise.reject('No user logged in');
@@ -88,7 +103,6 @@ export class AuthService {
       return new Promise((resolve, reject) => {
         this.memberService.getMemberByEmail(userEmail).subscribe(
           (response) => {
-            console.log(response);
             this.setUserClaims(user);
             this.memberService.setToken(user.multiFactor.user.accessToken)
             this.memberService.setUserType(response.type)
@@ -154,6 +168,7 @@ export class AuthService {
   getLoginStatus(): boolean {
     return this.isLoggedInStatus.value; // Retourne l'état actuel de connexion
   }
+  
 }
 
 
