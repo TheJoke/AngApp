@@ -1,0 +1,122 @@
+<div *ngIf="isLoggedIn" fxLayout="row" fxLayoutAlign="end center">
+  <button routerLink="/create" mat-raised-button color="primary">Create</button>
+</div>
+
+<!-- Tableau des étudiants -->
+<h2>Etudiants</h2>
+<table mat-table [dataSource]="etudiants" class="mat-elevation-z8">
+  <!-- ID Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+  </ng-container>
+
+  <!-- CIN Column -->
+  <ng-container matColumnDef="cin">
+    <th mat-header-cell *matHeaderCellDef> CIN </th>
+    <td mat-cell *matCellDef="let element"> {{ element.cin }} </td>
+  </ng-container>
+
+  <!-- Nom Column -->
+  <ng-container matColumnDef="nom">
+    <th mat-header-cell *matHeaderCellDef> Nom </th>
+    <td mat-cell *matCellDef="let element"> {{ element.nom }} </td>
+  </ng-container>
+
+  <!-- Prenom Column -->
+  <ng-container matColumnDef="prenom">
+    <th mat-header-cell *matHeaderCellDef> Prenom </th>
+    <td mat-cell *matCellDef="let element"> {{ element.prenom }} </td>
+  </ng-container>
+
+  <!-- Diplôme Column -->
+  <ng-container matColumnDef="diplome">
+    <th mat-header-cell *matHeaderCellDef> Diplôme </th>
+    <td mat-cell *matCellDef="let element"> {{ element.diplome }} </td>
+  </ng-container>
+
+
+  <!-- Email Column -->
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <td mat-cell *matCellDef="let element"> {{ element.email }} </td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container *ngIf="isLogged" matColumnDef="crud">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let element">
+      <button routerLink="/{{ element.id }}/edit">
+        <mat-icon fontIcon="edit"></mat-icon>
+      </button>
+      <button (click)="delete(element.id)">
+        <mat-icon fontIcon="delete"></mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+</table>
+
+<!-- Tableau des enseignants -->
+<h2>Enseignants</h2>
+<table mat-table [dataSource]="enseignants" class="mat-elevation-z8">
+  <!-- ID Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+  </ng-container>
+
+  <!-- CIN Column -->
+  <ng-container matColumnDef="cin">
+    <th mat-header-cell *matHeaderCellDef> CIN </th>
+    <td mat-cell *matCellDef="let element"> {{ element.cin }} </td>
+  </ng-container>
+
+  <!-- Nom Column -->
+  <ng-container matColumnDef="nom">
+    <th mat-header-cell *matHeaderCellDef> Nom </th>
+    <td mat-cell *matCellDef="let element"> {{ element.nom }} </td>
+  </ng-container>
+
+  <!-- Prenom Column -->
+  <ng-container matColumnDef="prenom">
+    <th mat-header-cell *matHeaderCellDef> Prenom </th>
+    <td mat-cell *matCellDef="let element"> {{ element.prenom }} </td>
+  </ng-container>
+
+  <!-- Grade Column -->
+  <ng-container matColumnDef="grade">
+    <th mat-header-cell *matHeaderCellDef> Grade </th>
+    <td mat-cell *matCellDef="let element"> {{ element.grade }} </td>
+  </ng-container>
+
+  <!-- Établissement Column -->
+  <ng-container matColumnDef="etablissement">
+    <th mat-header-cell *matHeaderCellDef> Établissement </th>
+    <td mat-cell *matCellDef="let element"> {{ element.etablissement }} </td>
+  </ng-container>
+
+  <!-- Email Column -->
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <td mat-cell *matCellDef="let element"> {{ element.email }} </td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container *ngIf="isLogged" matColumnDef="crud">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let element">
+      <button routerLink="/{{ element.id }}/edit">
+        <mat-icon fontIcon="edit"></mat-icon>
+      </button>
+      <button (click)="delete(element.id)">
+        <mat-icon fontIcon="delete"></mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+</table>

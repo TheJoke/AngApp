@@ -1,0 +1,43 @@
+
+  <div class="login-container" >
+    <div class="login-left">
+      <mat-card>
+        <mat-card-title>Laboratoire</mat-card-title>
+        <mat-card-content>
+          <mat-form-field appearance="outline" class="rounded-input">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Enter your email">
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="rounded-input">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput placeholder="Enter your password">
+          </mat-form-field>
+  
+          <!-- Login Button with Animation -->
+          <button mat-raised-button class="full-width primary-btn animated-btn">
+            <span>Login</span>
+          </button>
+  
+          <!-- Google Button with Icon -->
+          <button mat-raised-button (click)="signin()" class="full-width animated-btn google-btn">
+            <i class="fab fa-google"></i><span>Sign in with Google</span>
+          </button>
+          
+        </mat-card-content>
+      
+  
+        <mat-card-actions class="signup-link">
+          <span>Don't have an account?</span>
+          <a href="#">Sign Up Now</a>
+        </mat-card-actions>
+        
+      </mat-card>
+    </div>
+  
+    <div class="login-right">
+      <img src="assets/lab.png" alt="Login Image" />
+    </div>
+  </div>
+
+ 

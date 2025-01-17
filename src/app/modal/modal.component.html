@@ -1,0 +1,31 @@
+<mat-dialog-content [formGroup]="form">
+    <mat-form-field appearance="fill">
+        <mat-label>Titre</mat-label>
+        <input matInput placeholder="titre" formControlName="titre">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
+          <input matStartDate formControlName="dateDebut" placeholder="Start date">
+          <input matEndDate formControlName="dateFin" placeholder="End date">
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      
+        <!-- <mat-error *ngIf="form.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+        <mat-error *ngIf="form.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error> -->
+      </mat-form-field>
+      <br>
+      
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="lieu" formControlName="lieu">
+      </mat-form-field>
+      <br>
+      <mat-dialog-actions>
+        <button class="mat-raised-button" (click)="close()">Close</button>
+        <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+      </mat-dialog-actions>
+      
+</mat-dialog-content>

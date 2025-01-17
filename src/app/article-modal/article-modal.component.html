@@ -1,0 +1,37 @@
+<mat-dialog-content [formGroup]="form">
+    <mat-form-field appearance="fill">
+        <mat-label>Titre</mat-label>
+        <input matInput placeholder="titre" formControlName="titre">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Enter a date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date" placeholder="MM/DD/YYYY">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <!-- Uncomment the following line if you want to show an error message for invalid date -->
+        <!-- <mat-error *ngIf="form.controls.date?.hasError('matDatepickerParse')">Invalid date</mat-error> -->
+      </mat-form-field>
+      
+      <br>
+      
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="type" formControlName="type">
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="lien" formControlName="lien">
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="sourcePdf" formControlName="sourcePdf">
+      </mat-form-field>
+
+      <mat-dialog-actions>
+        <button class="mat-raised-button" (click)="close()">Close</button>
+        <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+      </mat-dialog-actions>
+      
+</mat-dialog-content>

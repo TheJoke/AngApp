@@ -1,0 +1,24 @@
+<mat-dialog-content [formGroup]="form">
+      <mat-form-field>
+        <mat-label>Enter a date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date" placeholder="MM/DD/YYYY">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <!-- Uncomment the following line if you want to show an error message for invalid date -->
+        <!-- <mat-error *ngIf="form.controls.date?.hasError('matDatepickerParse')">Invalid date</mat-error> -->
+      </mat-form-field>
+      
+      <br>
+
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="source" formControlName="source">
+      </mat-form-field>
+
+      <mat-dialog-actions>
+        <button class="mat-raised-button" (click)="close()">Close</button>
+        <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+      </mat-dialog-actions>
+      
+</mat-dialog-content>

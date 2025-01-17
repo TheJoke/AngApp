@@ -1,0 +1,177 @@
+<div class="container mx-auto p-4">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          {{ currentId ? 'Modifier un membre' : 'Ajouter un membre' }}
+        </mat-card-title>
+      </mat-card-header>
+  
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="submit()" class="grid gap-4">
+          <!-- Informations de base -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Type de membre -->
+            <mat-form-field appearance="outline">
+              <mat-label>Type de membre</mat-label>
+              <mat-select formControlName="type">
+                <mat-option value="etd">Étudiant</mat-option>
+                <mat-option value="ens">Enseignant</mat-option>
+              </mat-select>
+              <mat-error *ngIf="form.get('type')?.errors?.['required']">
+                Le type est requis
+              </mat-error>
+            </mat-form-field>
+  
+            <!-- CIN -->
+            <mat-form-field appearance="outline">
+              <mat-label>CIN</mat-label>
+              <input matInput formControlName="cin" placeholder="CIN">
+              <mat-error *ngIf="form.get('cin')?.errors?.['required']">
+                Le CIN est requis
+              </mat-error>
+            </mat-form-field>
+  
+            <!-- Nom -->
+            <mat-form-field appearance="outline">
+              <mat-label>Nom</mat-label>
+              <input matInput formControlName="nom" placeholder="Nom">
+              <mat-error *ngIf="form.get('nom')?.errors?.['required']">
+                Le nom est requis
+              </mat-error>
+            </mat-form-field>
+  
+            <!-- Prénom -->
+            <mat-form-field appearance="outline">
+              <mat-label>Prénom</mat-label>
+              <input matInput formControlName="prenom" placeholder="Prénom">
+              <mat-error *ngIf="form.get('prenom')?.errors?.['required']">
+                Le prénom est requis
+              </mat-error>
+            </mat-form-field>
+  
+            <!-- Email -->
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" type="email" placeholder="Email">
+              <mat-error *ngIf="form.get('email')?.errors?.['required']">
+                L'email est requis
+              </mat-error>
+              <mat-error *ngIf="form.get('email')?.errors?.['email']">
+                Format d'email invalide
+              </mat-error>
+            </mat-form-field>
+  
+            <!-- Mot de passe -->
+            <mat-form-field appearance="outline">
+              <mat-label>Mot de passe</mat-label>
+              <input matInput formControlName="password" type="password" placeholder="Mot de passe">
+              <mat-error *ngIf="form.get('password')?.errors?.['required']">
+                Le mot de passe est requis
+              </mat-error>
+              <mat-error *ngIf="form.get('password')?.errors?.['minlength']">
+                Le mot de passe doit contenir au moins 6 caractères
+              </mat-error>
+            </mat-form-field>
+  
+            <!-- Date de naissance -->
+            <mat-form-field appearance="outline">
+              <mat-label>Date de naissance</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="dateNaissance">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error *ngIf="form.get('dateNaissance')?.errors?.['required']">
+                La date de naissance est requise
+              </mat-error>
+            </mat-form-field>
+  
+            <!-- Établissement -->
+            <mat-form-field appearance="outline">
+              <mat-label>Établissement</mat-label>
+              <input matInput formControlName="etablissement" placeholder="Établissement">
+            </mat-form-field>
+          </div>
+  
+          <!-- Champs spécifiques pour étudiant -->
+          <div *ngIf="isEtudiant" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Diplôme -->
+            <mat-form-field appearance="outline">
+              <mat-label>Diplôme</mat-label>
+              <input matInput formControlName="diplome" placeholder="Diplôme">
+              <mat-error *ngIf="form.get('diplome')?.errors?.['required']">
+                Le diplôme est requis pour les étudiants
+              </mat-error>
+            </mat-form-field>
+
+            
+          </div>
+  
+          <!-- Champs spécifiques pour enseignant -->
+          <div *ngIf="isEnseignant" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Grade -->
+            <mat-form-field appearance="outline">
+              <mat-label>Grade</mat-label>
+              <input matInput formControlName="grade" placeholder="Grade">
+              <mat-error *ngIf="form.get('grade')?.errors?.['required']">
+                Le grade est requis pour les enseignants
+              </mat-error>
+            </mat-form-field>
+          </div>
+  
+          <!-- Upload de fichiers -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- CV -->
+            <div class="file-input">
+              <mat-label>CV (PDF)</mat-label>
+              <input type="file" accept=".pdf" (change)="onFileChange($event, 'cv')">
+            </div>
+  
+            <!-- Photo -->
+            <div class="file-input">
+              <mat-label>Photo de profil</mat-label>
+              <input type="file" accept="image/*" (change)="onFileChange($event, 'photo')">
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+  
+      <mat-card-actions align="end" class="p-4">
+        <button mat-button type="button" routerLink="/member">
+          Annuler
+        </button>
+        <button mat-raised-button color="primary" (click)="submit()" [disabled]="form.invalid">
+          {{ currentId ? 'Modifier' : 'Ajouter' }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  
+  <style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .file-input {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+  }
+  
+  .file-input mat-label {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+  }
+  
+  .file-input input[type="file"] {
+    padding: 8px;
+  }
+  
+  mat-card-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+  </style>

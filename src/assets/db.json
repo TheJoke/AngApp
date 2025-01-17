@@ -1,0 +1,71 @@
+{
+  "members": [
+    {
+      "id": "22",
+      "cin": "12548",
+      "nom": "ayoub",
+      "prenom": "mohamed",
+      "cv": "lien",
+      "type": "student",
+      "createdDate": "2024-09-30T15:55:29.858Z",
+      "email": "ay@en.tn",
+      "password": "string",
+      "photo": ""
+    },
+    {
+      "id": "54",
+      "cin": "12548",
+      "nom": "ayoub",
+      "prenom": "mohamed",
+      "cv": "lien",
+      "type": "student",
+      "createdDate": "2024-09-30T15:55:29.858Z",
+      "email": "ay@en.tn",
+      "password": "string",
+      "photo": ""
+    }
+  ],
+  "events": [
+    {
+      "titre": "conf",
+      "dateDebut": "2024-09-30T23:00:00.000Z",
+      "dateFin": "2024-10-04T23:00:00.000Z",
+      "lieu": "paris",
+      "id": "12"
+    },
+    {
+      "id": "string",
+      "titre": "string",
+      "dateDebut": "string",
+      "dateFin": "string",
+      "lieu": "string"
+    },
+    {
+      "id": "string",
+      "titre": "string",
+      "dateDebut": "string",
+      "dateFin": "string",
+      "lieu": "string"
+    },
+    {
+      "id": "a20a",
+      "titre": "helloworld",
+      "dateDebut": "2024-10-13T23:00:00.000Z",
+      "dateFin": "2024-10-17T23:00:00.000Z",
+      "lieu": "sfax"
+    },
+    {
+      "id": "89e8"
+    },
+    {
+      "id": "81b0"
+    }
+  ],
+  "outils": [
+    {
+      "id": "1",
+      "date": "16/09/2001",
+      "source": "darna"
+    }
+  ]
+}
