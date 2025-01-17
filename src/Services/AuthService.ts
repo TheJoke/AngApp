@@ -3,7 +3,7 @@ import {AngularFireAuth} from '@angular/fire/compat/auth';
 
 import * as auth from 'firebase/auth';
 import { MemberService } from './member.service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
@@ -11,10 +11,18 @@ export class AuthService {
     public userClaims: any;
     // private allowedEmails = ['ghorbel.yasmine@enis.tn', 'anotheruser@example.com']; // Liste des emails autorisés
     private userRole: string | null = null;
-    private isLoggedInStatus: boolean = false;
+    private isLoggedInStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-    constructor(public afAuth: AngularFireAuth,private memberService:MemberService) {
-
+    constructor(public afAuth: AngularFireAuth, private memberService: MemberService) {
+      this.afAuth.onAuthStateChanged((user) => {
+        if (user) {
+          console.log('User is logged in');
+          this.isLoggedInStatus.next(true);  // Update status to logged in
+        } else {
+          console.log('User is logged out');
+          this.isLoggedInStatus.next(false); // Update status to logged out
+        }
+      });
     }
   
     // Méthode de connexion Google
@@ -139,20 +147,12 @@ export class AuthService {
     logout() {
       this.userRole = null;
     }
-authStatusListener(): void {
-    this.afAuth.onAuthStateChanged((user) => {
-      if (user) {
-        console.log(user);
-        console.log('User is logged in');
-        this.isLoggedInStatus = true;  // User is logged in
-      } else {
-        console.log('User is logged out');
-        this.isLoggedInStatus = false; // User is logged out
-      }
-    });
+
+  authStatusListener(): Observable<boolean> {
+    return this.isLoggedInStatus.asObservable(); // Retourne l'observable pour s'abonner dans le composant
   }
   getLoginStatus(): boolean {
-    return this.isLoggedInStatus;
+    return this.isLoggedInStatus.value; // Retourne l'état actuel de connexion
   }
 }
 

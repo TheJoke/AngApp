@@ -30,6 +30,7 @@ export class ArticlesComponent implements OnInit {
       })
       this.auth.authStatusListener();
       this.isLoggedIn = this.auth.getLoginStatus();
+      console.log(this.isLoggedIn)
   }
   open():void{
     const dialogRef = this.dialog.open(ArticleModalComponent,{

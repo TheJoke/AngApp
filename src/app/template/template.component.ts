@@ -1,25 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AuthService } from 'src/Services/AuthService';
-
 @Component({
   selector: 'app-template',
   templateUrl: './template.component.html',
   styleUrls: ['./template.component.css']
 })
-export class TemplateComponent {
+export class TemplateComponent implements OnInit{
   isLoggedIn : boolean =false;
-  constructor(private AS:AuthService,private router:Router){}
+  constructor(private auth:AuthService,private router:Router){}
+  ngOnInit(): void {
+    this.auth.authStatusListener().subscribe((status) => {
+      this.isLoggedIn = status;  // Met à jour isLoggedIn en fonction du statut
+    });
+  }
   logout():void{
-    this.isLoggedIn=false;
-    this.AS.doLogout().then(()=>{
+    this.auth.doLogout().then(()=>{
       this.router.navigate(['']);
     })
   }
   login(): void {
-    this.isLoggedIn = true;
-    this.router.navigate(['login/']);
+    this.router.navigate(['/login']);
+    console.log(this.isLoggedIn);
   }
-  
+
+  isLogged(): boolean {
+    return this.isLoggedIn;
+  }
 }
