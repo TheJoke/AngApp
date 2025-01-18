@@ -27,4 +27,7 @@ export class TemplateComponent implements OnInit{
   isLogged(): boolean {
     return this.isLoggedIn;
   }
+  isAdmin():boolean{
+    return this.auth.getUserRole()=="admin";
+  }
 }

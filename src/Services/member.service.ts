@@ -80,5 +80,8 @@ export class MemberService {
     localStorage.removeItem(this.USER_TYPE_KEY);
     localStorage.removeItem(this.USER_ID_KEY);
   }
+  findEnseignantByGrade(grade:string):Observable<Member[]>{
+    return this.http.get<Member[]>(`http://localhost:9000/membres/search?grade=${grade}`);
+  }
 }
 

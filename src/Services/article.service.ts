@@ -26,4 +26,7 @@ constructor(private http:HttpClient){}
   updateArticle(x:Article,id:string):Observable<void>{
     return this.http.put<void>(`http://localhost:9000/articles/${id}`,x);
   }
+  findByType(type:string):Observable<Article[]>{
+    return this.http.get<Article[]>(`http://localhost:9000/articles/search?type=${type}`);
+  }
 }

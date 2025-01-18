@@ -1,0 +1,49 @@
+.mat-toolbar {
+    padding: 0 16px;
+  
+    .search-container {
+      max-width: 400px;
+      width: 100%;
+      margin: 0 24px;
+     
+      .search-field {
+        width: 100%;
+        font-size: 14px;
+       
+        ::ng-deep {
+          .mat-form-field-wrapper {
+            margin-bottom: -1.25em;
+          }
+         
+          .mat-form-field-outline {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+          }
+  
+          .mat-form-field-flex {
+            padding: 0 12px;
+            height: 40px;
+            align-items: center;
+          }
+  
+          .mat-form-field-infix {
+            padding: 0;
+            border-top: none;
+          }
+         
+          .search-icon {
+            margin-right: 8px;
+            opacity: 0.7;
+          }
+         
+          input.search-input {
+            color: white;
+           
+            &::placeholder {
+              color: rgba(255, 255, 255, 0.5);
+            }
+          }
+        }
+      }
+    }
+  }

@@ -35,6 +35,9 @@
   
         <div class="toolbar-separator"></div>
         
+
+        
+
        <button [matMenuTriggerFor]="userMenu" class="toolbar-button" mat-button style="margin-left: 85%; margin-right: 5%;">
           <div fxLayout="row" fxLayoutAlign="center center">
             <mat-icon>account_circle</mat-icon>
@@ -42,10 +45,11 @@
             <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
           </div>
         </button>
+        
 
         <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
           <ng-container *ngIf="isLoggedIn; else loginOption">
-            <button mat-menu-item>
+            <button *ngIf="!this.isAdmin()" mat-menu-item>
               <mat-icon>account_box</mat-icon>
               <span>Profile</span>
             </button>
