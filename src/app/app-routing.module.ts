@@ -7,6 +7,7 @@ import { ArticlesComponent } from './articles/articles.component';
 import { EventsComponent } from './events/events.component';
 import { LoginComponent } from './login/login.component';
 import { OutilsComponent } from './outils/outils.component';
+import { ProfilModalComponent } from './profil-modal/profil-modal.component';
 
 const routes: Routes = [
 
@@ -50,7 +51,13 @@ const routes: Routes = [
     path: 'login',
     pathMatch:"full",
     component: LoginComponent
+  },
+  {
+    path: ':id/profile',
+    pathMatch:"full",
+    component: ProfilModalComponent
   }
+
   ,{
     path: '',
     component: LoginComponent

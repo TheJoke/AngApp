@@ -13,7 +13,7 @@ export class AuthService {
     // private allowedEmails = ['ghorbel.yasmine@enis.tn', 'anotheruser@example.com']; // Liste des emails autorisés
     private userRole: string | null = null;
     private isLoggedInStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
+    private userId :number =0;
 
     constructor(public afAuth: AngularFireAuth, private memberService: MemberService) {
       this.afAuth.onAuthStateChanged(async (user) => {
@@ -108,7 +108,9 @@ export class AuthService {
             this.memberService.setUserType(response.type)
             this.memberService.setIdUser(response.id)
             this.memberService.saveIdAndUserType(user.multiFactor.user.accessToken,response.type,response.id)
+            this.userId = response.id;
             resolve(user); // Résolution de la promesse avec l'utilisateur
+
           },
           (error) => {
             reject('User is not authorized'); // Rejet de la promesse en cas d'erreur
@@ -167,6 +169,9 @@ export class AuthService {
   }
   getLoginStatus(): boolean {
     return this.isLoggedInStatus.value; // Retourne l'état actuel de connexion
+  }
+  getUserId():number{
+    return this.userId;
   }
   
 }

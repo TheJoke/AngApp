@@ -1,1 +1,29 @@
-<p>profil-modal works!</p>
+<h2 mat-dialog-title>Profil du membre</h2>
+<mat-dialog-content>
+  <!-- Indicateur de chargement -->
+  <div *ngIf="isLoading" class="loading-container">
+    <p>Chargement des données...</p>
+  </div>
+
+  <!-- Affichage des erreurs -->
+  <div *ngIf="errorMessage" class="error-container">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <!-- Affichage des données du membre -->
+  <div *ngIf="!isLoading && member">
+    <p><strong>ID :</strong> {{ member.id }}</p>
+    <p><strong>CIN :</strong> {{ member.cin }}</p>
+    <p><strong>Nom :</strong> {{ member.nom }}</p>
+    <p><strong>Prénom :</strong> {{ member.prenom }}</p>
+    <p><strong>Type :</strong> {{ member.type }}</p>
+    <p><strong>Email :</strong> {{ member.email }}</p>
+    <p><strong>Date de naissance :</strong> {{ member.dateNaissance }}</p>
+    <p><strong>Grade :</strong> {{ member.grade }}</p>
+    <p><strong>Établissement :</strong> {{ member.etablissement }}</p>
+    <p><strong>CV :</strong> <a [href]="member.cv" target="_blank">Télécharger</a></p>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Fermer</button>
+</mat-dialog-actions>

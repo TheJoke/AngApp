@@ -48,8 +48,8 @@
         
 
         <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
-          <ng-container *ngIf="isLoggedIn; else loginOption">
-            <button *ngIf="!this.isAdmin()" mat-menu-item>
+          <ng-container *ngIf="isLoggedIn; else loginOption" >
+            <button *ngIf="!this.isAdmin() "  mat-menu-item (click)="openModal(this.getUserid())">
               <mat-icon>account_box</mat-icon>
               <span>Profile</span>
             </button>
